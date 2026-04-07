@@ -11,27 +11,33 @@ class Content(scrapy.Spider):
 
     def parse(self, response):
         meta = self.meta_data(response)
+        text = self.get_text(response)
         images = self.extract_images(response)
 
         yield {
             'image_urls': images,
-            'page': response.url,
             'total_images': len(images),
-            'meta_data': meta
+            'meta_data': meta,
+            'content': text
         }
-
-    #Ekstrakcja Title
 
     #Ekstrakcja Meta danych
     def meta_data(self, response):
         return {
             'title': response.css('title::text').get(),
-            'description': response.css('meta[name="description"]::attr(content)').get(),
-            'keywords': response.css('meta[name="keywords"]::attr(content)').get(),
-            'og_title': response.css('meta[property="og:title"]::attr(content)').get(),
+            'description': response.css('meta[name="description"]::attr(content)').getall(),
+            'keywords': response.css('meta[name="keywords"]::attr(content)').getall(),
+            'og_title': response.css('meta[property="og:title"]::attr(content)').getall(),
         }
 
     #Eksrakcja Tekstu
+    def get_text(self, response):
+        return {
+            'h1': response.css('h1::text').get(),
+            'h2': response.css('h2::text').get(),
+            'a': response.css('a::text').get(),
+            'p': response.css('p::text').getall(),
+        }
 
     #Ekstrakcja Obrazow
     def extract_images(self, response):
