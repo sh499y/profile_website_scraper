@@ -14,20 +14,20 @@ def main():
     print("SCRAPER WEB - Web Scraping Tool")
     print("=" * 50)
 
-    # Pobierz URL od użytkownika
+    # Pobierz URL od uzytkownika
     url = input("\nPodaj URL strony do scrapowania: ").strip()
 
     if not url:
         print("❌ Błąd: URL nie może być pusty!")
         return
 
-    # Dodaj http:// jeśli brakuje
+    # Dodaj http:// jesli brakuje
     if not url.startswith(('http://', 'https://')):
         url = 'https://' + url
         print(f"ℹ️  Dodano https:// -> {url}")
 
     # Nazwa pliku output
-    output_file = input("\nPodaj nazwę pliku output (domyślnie: output.json): ").strip()
+    output_file = input("\nPodaj nazwe pliku output (domyslnie: output.json): ").strip()
     if not output_file:
         output_file = "output.json"
 
@@ -49,13 +49,18 @@ def main():
         }
     })
 
-    # Uruchom spider'a
+    # Uruchia spider
     process = CrawlerProcess(settings)
     process.crawl(Content, url=url)
-    process.start()  # Blokujące - czeka na zakończenie
+    process.start()  # Czeka na zakonczenie crawlera
 
-    print(f"\n✅ Zakończono! Wyniki zapisane w: {output_file}")
+    print(f"\n✅ Koniec crawlera Wyniki zapisane w: {output_file}")
 
+
+def ai():
+    print("=" * 50)
+    print("Ai")
+    print("=" * 50)
 
 if __name__ == '__main__':
     main()

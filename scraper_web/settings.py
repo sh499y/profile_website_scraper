@@ -63,9 +63,9 @@ DOWNLOAD_DELAY = 1
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    "scraper_web.pipelines.ScraperWebPipeline": 300,
-#}
+ITEM_PIPELINES = {
+    "scraper_web.pipelines.CustomImagesPipeline": 1,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

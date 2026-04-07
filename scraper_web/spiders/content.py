@@ -15,6 +15,7 @@ class Content(scrapy.Spider):
         images = self.extract_images(response)
 
         yield {
+            'page': response.url,
             'image_urls': images,
             'total_images': len(images),
             'meta_data': meta,
