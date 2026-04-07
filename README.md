@@ -48,3 +48,7 @@ scraper_web/
 ```bash
 scrapy genspider nazwa_spider example.com
 ```
+## Korzystanie z programu
+```
+scrapy crawl content -a url=https://quotes.toscrape.com/page/2/
+```

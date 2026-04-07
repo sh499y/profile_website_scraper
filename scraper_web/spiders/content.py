@@ -1,13 +1,27 @@
 import scrapy
 
+
 class Content(scrapy.Spider):
     name = 'content'
-    start_urls = ['https://akcesoriameblowepoznan.pl/']
-
+    
+    def __init__(self, url=None, *args, **kwargs):
+        super(Content, self).__init__(*args, **kwargs)
+        
+        if url:
+            self.start_urls = [url]
+        else:
+            # Domyślny URL jeśli nie podano
+            print("Link ERROR")
+    
     def parse(self, response):
-
-        h1_text = response.css('h1::text').getall()
-
+        # Zbierz wszystkie URLe obrazów
+        image_urls = response.css('img::attr(src)').getall()
+        
+        # Konwertuj relatywne URLe na absolutne
+        image_urls = [response.urljoin(url) for url in image_urls]
+        
         yield {
-            'all_h1': h1_text[0],
+            'image_urls': image_urls,
+            'page': response.url,
+            'total_images': len(image_urls)
         }

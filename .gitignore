@@ -20,6 +20,7 @@ pip-wheel-metadata/
 share/python-wheels/
 *.manifest
 *.spec
+images
 
 # Virtual Environment
 .venv/
@@ -69,3 +70,8 @@ htmlcov/
 
 # OS
 Thumbs.db
+
+#images
+.web
+.jpg
+.png
